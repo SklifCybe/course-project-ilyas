@@ -1,23 +1,11 @@
-import { PickType } from '@nestjs/swagger';
+import { PartialType } from '@nestjs/swagger';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString, IsAlpha, Length } from 'class-validator';
-import { User } from '../entities/user.entity';
+import { CreateUserDto } from './create-user.dto';
 
-export class UpdateUserDto extends PickType(User, [
-    'firstName',
-    'lastName',
-] as const) {
+export class UpdateUserDto extends PartialType(CreateUserDto) {
     @ApiProperty()
-    @IsNotEmpty()
-    @IsString()
-    @IsAlpha()
-    @Length(2, 12)
     firstName: string;
 
     @ApiProperty()
-    @IsNotEmpty()
-    @IsString()
-    @IsAlpha()
-    @Length(2, 12)
     lastName: string;
 }
